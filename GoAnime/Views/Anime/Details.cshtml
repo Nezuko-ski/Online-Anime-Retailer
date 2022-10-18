@@ -1,0 +1,91 @@
+﻿@model GoAnime.Domain.Models.Anime;
+
+@{
+    ViewData["Title"] = "Anime details";
+}
+
+<div class="row">
+    {
+    <div class="col-md-8 offset-2">
+        <div class="card mb-12">
+            <div class="row g-0">
+                <div class="col-md-12">
+                    <div class="card-header text-white bg-info">
+                        <p class="card-text">
+                            <h5 class="card-title">
+                                @Model.Name
+                            </h5>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <img src="@Model.ImageURL" width="100%">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <p class="card-text">
+                            <b>Studio: </b>
+                            <a asp-controller="Studios" asp-action="Details" asp-route-id="@Model.StudioId">
+                                @Model.Studio.Name
+                            </a>
+                        </p>
+                        <p class="card-text">
+                            <b>Producer: </b>
+                            <a asp-controller="Producers" asp-action="Details" asp-route-id="@Model.ProducerId">
+                                @Model.Producer.FullName
+                            </a>
+                        </p>
+                        <p class="card-text"><b>Genre: </b>@Model.AnimeGenre</p>
+                        <p class="card-text"><b>Start Date: </b>@Model.StartDate.ToString("dd MMM yy")</p>
+                        <p class="card-text"><b>End Date: </b>@Model.EndDate.ToString("dd MMM yy")</p>
+                        <p class="card-text">
+                            <b>Status: </b>
+                            @if (DateTime.Now <= Model.StartDate && DateTime.Now <= Model.EndDate)
+                            {
+                                <span class="badge bg-success text-white">Upcoming</span>
+                            }
+                            else if (DateTime.Now > Model.EndDate)
+                            {
+                                <span class="badge bg-danger text-white">Expired</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-primary text-white">Available</span>
+                            }
+                        </p>
+                        <p class="card-text">
+                            <b>VoiceActors: </b>
+                            <hr />
+                            <div class="row">
+                                @foreach (var voiceActor in Model.VoiceActors_Anime)
+                                {
+                                    <div class="column text-center">
+                                        <img src="@voiceActor.VoiceActor.ProfilePictureURL" style="max-width: 150px" class="rounded-circle">
+                                        <br />
+                                        <a asp-controller="VoiceActors" asp-action="Details" asp-route-id="@voiceActor.VoiceActorId">
+                                            @voiceActor.VoiceActor.FullName
+                                        </a>
+                                    </div>
+                                }
+                            </div>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="card-footer">
+                        <p class="card-text">
+                            <a class="btn btn-outline-primary float-right" asp-action="Index">
+                            Back to List
+                            </a>
+                            <a class="btn btn-success text-white" asp-controller="Orders" asp-action="AddToCart" asp-route-id="@Model.Id">
+                                <i class="bi bi-cart-plus"></i>
+                                Add to Cart (Price @Model.Price.ToString("c", CultureInfo.CreateSpecificCulture("en-US")))
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    }
+</div>

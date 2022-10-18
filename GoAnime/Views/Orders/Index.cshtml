@@ -1,0 +1,53 @@
+﻿@using GoAnime.Domain.Models
+@model IEnumerable<GoAnime.Domain.Models.Order>
+
+@{
+    ViewData["Title"] = "List of Orders";
+}
+<div class="row">
+    <div class="col-md-8 offset-2">
+        <p>
+            <h4>List of all your orders</h4>
+        </p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Order ID</th>
+                    <th style="text-align: center">Items</th>
+                    <th>Total</th>
+                    @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                    {
+                        <th>User</th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var order in Model)
+                {
+                    <tr>
+                        <td class="align-middle">@order.Id</td>
+                        <td class="align-middle">
+                            <ul style="list-style-type: none">
+                                @foreach (var item in order.OrderItems)
+                                {
+                                    <li>
+                                        <div class="alert alert-info" role="alert">
+                                            <span class="badge bg-success">@item.Quantity</span>
+                                            [@item.Price.ToString("C", CultureInfo.CreateSpecificCulture("en-US"))] - @item.Anime.Name
+                                        </div>
+                                    </li>
+                                }
+                            </ul>
+                        </td>
+                        <td class="align-middle">@order.OrderItems.Sum(v => v.Anime.Price * v.Quantity).ToString("C", CultureInfo.
+                        CreateSpecificCulture("en-US"))</td>
+                        @if(User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                        {
+                            <td class="align-middle"> @order.Fan.FullName </td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

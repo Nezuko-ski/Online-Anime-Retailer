@@ -1,0 +1,106 @@
+﻿@model GoAnime.Core.ViewModels.CartVM
+
+@{
+    ViewData["Title"] = "Cart Summary";
+}
+
+<div class="row">
+    <div class="col-md-8 offset-2">
+        <div class="text-center">
+            <h3>Your Shopping Cart Summary</h3>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Anime</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Subtotal</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Cart.CartItems)
+                {
+                    <tr>
+                        <td class="align-middle">
+                            @item.Anime.Name
+                        </td>
+                        <td class="align-middle">
+                            @item.Quantity
+                        </td>
+                        <td class="align-middle">
+                            @item.Anime.Price.ToString("C", CultureInfo.CreateSpecificCulture("en-US"))
+                        </td>
+                        <td class="align-middle">
+                            @((item.Anime.Price * item.Quantity).ToString("C", CultureInfo.CreateSpecificCulture("en-US")))
+                        </td>
+                        <td class="align-middle">
+                            <a class="text-danger" asp-controller="Orders" asp-action="RemoveFromCart" 
+                                 asp-route-id="@item.Anime.Id">
+                                <i class="bi bi-cart-dash"></i>
+                            </a>
+                            |
+                            <a class="text-success" asp-controller="Orders" asp-action="AddToCart"
+                                 asp-route-id="@item.Anime.Id">
+                                <i class="bi bi-cart-plus"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="2"></td>
+                    <td><b>Total:</b></td>
+                    <td>
+                        @Model.CartTotal.ToString("C", CultureInfo.CreateSpecificCulture("en-US"))
+                    </td>
+                    <td></td>
+                </tr>
+            </tfoot>
+        </table>
+        <div class="text-right">
+            <div class="btn-group">
+                <div id="paypal-btn"></div>
+                <span style="padding: 10px"></span>
+                <a class="btn btn-outline-success" asp-controller="Anime" asp-action="Index">Add More Anime</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="https://www.paypalobjects.com/api/checkout.js"></script>
+    <script>
+        paypal.Button.render({
+            env: 'sandbox',
+            client: {
+                sandbox: 'Ad35txeGcNo_1v3_XFtx0XKopDZqrx1vdgDAxmxfr-6xeG6mpYRj8ZqvYc-Y-0J5LCtMw1N-sNKqsSV5'
+            },
+            locale: 'en_US',
+            style: {
+                label: 'checkout',
+                size: 'small',
+                color: 'gold',
+                shape: 'pill'
+            },
+           // commit: true
+            payment: function (data, actions) {
+                return actions.payment.create({
+                    transactions: [{
+                        amount: {
+                            total: '@Model.CartTotal.ToString("F2", CultureInfo.CreateSpecificCulture("en-US"))',
+                            currency: 'USD'
+                        }
+                    }]
+                });
+            },
+            onAuthorize: function (data, actions) {
+                return actions.payment.execute().then(function () {
+                    window.location.href = '@Url.Action("CompleteOrder", "Orders")';
+                });
+            },
+        }, '#paypal-btn');
+    </script>
+}

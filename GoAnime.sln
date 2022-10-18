@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32804.467
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoAnime", "GoAnime\GoAnime.csproj", "{C6DFA7D0-955B-4D7B-BEED-9F7505EBFBEB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoAnime.Core", "GoAnime.Core\GoAnime.Core.csproj", "{A744E3B3-C8C1-44BB-9968-87CE157D716E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoAnime.Domain", "GoAnime.Domain\GoAnime.Domain.csproj", "{21C826D9-EE71-437B-904B-9F9EF7FC19EE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoAnime.Infrastructure", "GoAnime.Infrastructure\GoAnime.Infrastructure.csproj", "{D95A5138-1A4B-4FF3-A3FE-D5D2CB647535}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C6DFA7D0-955B-4D7B-BEED-9F7505EBFBEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6DFA7D0-955B-4D7B-BEED-9F7505EBFBEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6DFA7D0-955B-4D7B-BEED-9F7505EBFBEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6DFA7D0-955B-4D7B-BEED-9F7505EBFBEB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A744E3B3-C8C1-44BB-9968-87CE157D716E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A744E3B3-C8C1-44BB-9968-87CE157D716E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A744E3B3-C8C1-44BB-9968-87CE157D716E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A744E3B3-C8C1-44BB-9968-87CE157D716E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21C826D9-EE71-437B-904B-9F9EF7FC19EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21C826D9-EE71-437B-904B-9F9EF7FC19EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21C826D9-EE71-437B-904B-9F9EF7FC19EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21C826D9-EE71-437B-904B-9F9EF7FC19EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D95A5138-1A4B-4FF3-A3FE-D5D2CB647535}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D95A5138-1A4B-4FF3-A3FE-D5D2CB647535}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D95A5138-1A4B-4FF3-A3FE-D5D2CB647535}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D95A5138-1A4B-4FF3-A3FE-D5D2CB647535}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A516146B-BB91-4BD0-ABC1-7175DEFA98A1}
+	EndGlobalSection
+EndGlobal
