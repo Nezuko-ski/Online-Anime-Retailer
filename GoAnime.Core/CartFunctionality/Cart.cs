@@ -74,6 +74,7 @@ namespace GoAnime.Core.CartFunctionality
         {
             var anime = await _context.CartItems.Where(v => v.CartId == CartId).ToListAsync();
             _context.CartItems.RemoveRange(anime);
+            await _context.SaveChangesAsync();
         }
     }
 }
